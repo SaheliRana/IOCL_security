@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Overtime Alerts</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #d9534f;
+            margin-bottom: 30px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #fff0f0;
+            padding: 15px 20px;
+            margin-bottom: 10px;
+            border-left: 5px solid #d9534f;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        li:hover {
+            background-color: #ffecec;
+        }
+
+        strong {
+            color: #333;
+        }
+
+        .no-alert {
+            text-align: center;
+            padding: 20px;
+            color: #5cb85c;
+            font-weight: bold;
+            background-color: #e6ffe6;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Overtime Alert</h1>
+        <h3 style="text-align: center; color: #666;">Workers Checked-in for &gt; 10 hours</h3>
+
+        {% if overtime_logs %}
+            <ul>
+                {% for log in overtime_logs %}
+                    <li>
+                        <strong>{{ log.worker.name }}</strong> ({{ log.worker.employee_id }})<br>
+                        Checked in at: {{ log.timestamp }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <div class="no-alert">
+                No workers have exceeded 10 hours.
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

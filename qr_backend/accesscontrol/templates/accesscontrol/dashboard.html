@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Checked-In Workers</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 40px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            max-width: 600px;
+        }
+
+        li {
+            background-color: #eafaf1;
+            border-left: 6px solid #2ecc71;
+            padding: 15px;
+            margin-bottom: 10px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        li:hover {
+            background-color: #d2f4e3;
+        }
+
+        .btn {
+            display: inline-block;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 12px 20px;
+            margin-top: 20px;
+            margin-right: 10px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-success {
+            background-color: #27ae60;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background-color: #219150;
+        }
+
+        .btn-primary {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #2a80b9;
+        }
+    </style>
+</head>
+<body>
+    <h1>Checked-In Workers</h1>
+    <p><strong>Total currently inside:</strong> {{ count }}</p>
+
+    <ul>
+        {% for worker in workers %}
+        <li>{{ worker.name }} ({{ worker.employee_id }})</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'export_csv' %}" class="btn btn-success">Download Attendance CSV</a>
+    <a href="{% url 'export_currently_inside' %}" class="btn btn-primary">Download Currently Inside CSV</a>
+</body>
+</html>

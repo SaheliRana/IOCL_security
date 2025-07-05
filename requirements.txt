@@ -1,0 +1,12 @@
+django>=4.2
+djangorestframework>=3.14
+opencv-python>=4.7.0
+ultralytics>=8.0.20
+torch>=2.0.0
+numpy>=1.21
+Pillow
+pyzbar
+qrcode
+reportlab
+dlib 
+face_recognition 
