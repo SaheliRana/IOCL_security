@@ -8,8 +8,6 @@ Pillow
 pyzbar
 qrcode
 reportlab
-dlib 
-face_recognition 
 gunicorn
 dj-database-url
 psycopg2-binary
