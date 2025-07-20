@@ -6,7 +6,28 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
 # Set working directory
+WORKDIR /app# Use a prebuilt image with dlib and face_recognition preinstalled
+FROM facegenius/face_recognition:latest
+
+# Set working directory
 WORKDIR /app
+
+# Copy requirements file and install only remaining Python dependencies
+COPY requirements.txt .
+
+# Remove dlib and face_recognition from requirements.txt if they exist
+RUN pip install --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
+
+# Copy your project files
+COPY . .
+
+# Collect static files
+RUN python manage.py collectstatic --noinput
+
+# Start the Django app using Gunicorn
+CMD ["gunicorn", "qr_backend.wsgi:application", "--bind", "0.0.0.0:8000"]
+
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
